@@ -50,6 +50,30 @@ TEST(TestGildedRoseGroup, TestNormalItem_QualityIsNeverNegative)
     STRCMP_EQUAL("Normal Item", items[0].name);
 }
 
+TEST(TestGildedRoseGroup, TestAgedBrieItem_QualityIsNeverMoreThan50)
+{
+    Item items[1];
+    init_item(items, "Aged Brie", 20, 50);
+    
+    update_quality(items, 1);
+
+    CHECK_EQUAL(19, items[0].sellIn);
+    CHECK_EQUAL(50, items[0].quality);
+    STRCMP_EQUAL("Aged Brie", items[0].name);
+}
+
+TEST(TestGildedRoseGroup, TestAgedBrieItem_IncreaseQuality)
+{
+    Item items[1];
+    init_item(items, "Aged Brie", 20, 30);
+    
+    update_quality(items, 1);
+
+    CHECK_EQUAL(19, items[0].sellIn);
+    CHECK_EQUAL(31, items[0].quality);
+    STRCMP_EQUAL("Aged Brie", items[0].name);
+}
+
 void example()
 {
     Item items[6];
