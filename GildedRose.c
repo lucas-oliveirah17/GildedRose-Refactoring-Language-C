@@ -83,12 +83,12 @@ void update_backstage_pass(Item* item)
     {
         item->quality += 1;
 
-        if(item->sellIn <= 10 && item->quality < 50)
+        if(item->sellIn < 10 && item->quality < 50)
         {
             item->quality += 1;
         }
 
-        if(item->sellIn <= 5 && item->quality < 50)
+        if(item->sellIn < 5 && item->quality < 50)
         {
             item->quality += 1;
         }
@@ -116,78 +116,33 @@ void update_conjured_item(Item* item)
 void 
 update_quality(Item items[], int size) 
 {
-    int i;
-    
-    for (i = 0; i < size; i++)
+    for(int index = 0; index < size; index++)
     {
-        if (strcmp(items[i].name, "Aged Brie") && strcmp(items[i].name, "Backstage passes to a TAFKAL80ETC concert"))
-        {
-            if (items[i].quality > 0)
-            {
-                if (strcmp(items[i].name, "Sulfuras, Hand of Ragnaros"))
-                {
-                    items[i].quality = items[i].quality - 1;
-                }
-            }
-        }
-        else
-        {
-            if (items[i].quality < 50)
-            {
-                items[i].quality = items[i].quality + 1;
+        Item* current_item = &items[index];
+        ItemType type = get_item_type(current_item->name);
 
-                if (!strcmp(items[i].name, "Backstage passes to a TAFKAL80ETC concert"))
-                {
-                    if (items[i].sellIn < 11)
-                    {
-                        if (items[i].quality < 50)
-                        {
-                            items[i].quality = items[i].quality + 1;
-                        }
-                    }
-
-                    if (items[i].sellIn < 6)
-                    {
-                        if (items[i].quality < 50)
-                        {
-                            items[i].quality = items[i].quality + 1;
-                        }
-                    }
-                }
-            }
+        if(type != SULFURAS)
+        {
+            current_item->sellIn -= 1;
         }
 
-        if (strcmp(items[i].name, "Sulfuras, Hand of Ragnaros"))
+        switch(type)
         {
-            items[i].sellIn = items[i].sellIn - 1;
-        }
-
-        if (items[i].sellIn < 0)
-        {
-            if (strcmp(items[i].name, "Aged Brie"))
-            {
-                if (strcmp(items[i].name, "Backstage passes to a TAFKAL80ETC concert"))
-                {
-                    if (items[i].quality > 0)
-                    {
-                        if (strcmp(items[i].name, "Sulfuras, Hand of Ragnaros"))
-                        {
-                            items[i].quality = items[i].quality - 1;
-                        }
-                    }
-                }
-                else
-                {
-                    items[i].quality = items[i].quality - items[i].quality;
-                }
-            }
-            else
-            {
-                if (items[i].quality < 50)
-                {
-                    items[i].quality = items[i].quality + 1;
-                }
-            }
+            case NORMAL_ITEM:
+                update_normal_item(current_item);
+                break;
+            case AGED_BRIE:
+                update_aged_brie(current_item);
+                break;
+            case SULFURAS:
+                update_sulfuras(current_item);
+                break;
+            case BACKSTAGE_PASS:
+                update_backstage_pass(current_item);
+                break;
+            case CONJURED_ITEM:
+                update_conjured_item(current_item);
+                break;
         }
     }
 }
