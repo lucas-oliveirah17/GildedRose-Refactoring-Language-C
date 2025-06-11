@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include "GildedRose.h"
 
-int
-print_item(Item *item)
+void
+display_item(Item *item)
 {
-    return printf("%s, %d, %d\n", item->name, item->sellIn, item->quality);
+    printf("%s, %d, %d\n", item->name, item->sellIn, item->quality);
 }
 
 int main()
@@ -32,7 +32,7 @@ int main()
         printf("-------- day %d --------\n", day);
         printf("name, sellIn, quality\n");
         for(index = 0; index < last; index++) {
-            print_item(items + index);
+            display_item(items + index);
         }
 	
         printf("\n");
