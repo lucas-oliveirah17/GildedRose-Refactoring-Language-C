@@ -14,12 +14,16 @@ TEST_GROUP(TestGildedRoseGroup)
   }
 };
 
-TEST(TestGildedRoseGroup, FirstTest)
+TEST(TestGildedRoseGroup, TestNormalItem_DecreaseQualityAndSellIn)
 {
     Item items[1];
-    init_item(items, "Foo", 0, 0);
+    init_item(items, "Normal Item", 10, 20);
+    
     update_quality(items, 1);
-    STRCMP_EQUAL("fixme", items[0].name);
+
+    CHECK_EQUAL(9, items[0].sellIn);
+    CHECK_EQUAL(19, items[0].quality);
+    STRCMP_EQUAL("Normal Item", items[0].name);
 }
 
 void example()
