@@ -43,6 +43,7 @@ extern char*
 print_item(char* buffer, Item* item) 
 {
     sprintf(buffer, "%s, %d, %d", item->name, item->sellIn, item->quality);
+    return buffer;
 }
 
 void 
