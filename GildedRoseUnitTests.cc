@@ -38,6 +38,18 @@ TEST(TestGildedRoseGroup, TestNormalItem_OnceSellInHasPassed_QualityDecreaseByTw
     STRCMP_EQUAL("Normal Item", items[0].name);
 }
 
+TEST(TestGildedRoseGroup, TestNormalItem_QualityIsNeverNegative)
+{
+    Item items[1];
+    init_item(items, "Normal Item", 10, 0);
+    
+    update_quality(items, 1);
+
+    CHECK_EQUAL(9, items[0].sellIn);
+    CHECK_EQUAL(0, items[0].quality);
+    STRCMP_EQUAL("Normal Item", items[0].name);
+}
+
 void example()
 {
     Item items[6];
