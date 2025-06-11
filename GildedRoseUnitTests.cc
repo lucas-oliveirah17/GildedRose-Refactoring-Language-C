@@ -134,6 +134,18 @@ TEST(TestGildedRoseGroup, TestBackstage_IncreasesQualityBy1_When11DaysOrMore)
     STRCMP_EQUAL("Backstage passes to a TAFKAL80ETC concert", items[0].name);
 }
 
+TEST(TestGildedRoseGroup, TestConjured_QualityDecreaseBy2)
+{
+    Item items[1];
+    init_item(items, "Conjured Mana Cake", 10, 20);
+    
+    update_quality(items, 1);
+
+    CHECK_EQUAL(9, items[0].sellIn);
+    CHECK_EQUAL(18, items[0].quality);
+    STRCMP_EQUAL("Conjured Mana Cake", items[0].name);
+}
+
 void example()
 {
     Item items[6];
