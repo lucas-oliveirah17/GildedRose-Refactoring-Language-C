@@ -110,6 +110,30 @@ TEST(TestGildedRoseGroup, TestBackstage_IncreasesQualityBy3_When5DaysOrLess)
     STRCMP_EQUAL("Backstage passes to a TAFKAL80ETC concert", items[0].name);
 }
 
+TEST(TestGildedRoseGroup, TestBackstage_QualityDropToZero_AfterConcert)
+{
+    Item items[1];
+    init_item(items, "Backstage passes to a TAFKAL80ETC concert", 0, 20);
+    
+    update_quality(items, 1);
+
+    CHECK_EQUAL(-1, items[0].sellIn);
+    CHECK_EQUAL(0, items[0].quality);
+    STRCMP_EQUAL("Backstage passes to a TAFKAL80ETC concert", items[0].name);
+}
+
+TEST(TestGildedRoseGroup, TestBackstage_IncreasesQualityBy1_When11DaysOrMore)
+{
+    Item items[1];
+    init_item(items, "Backstage passes to a TAFKAL80ETC concert", 11, 20);
+    
+    update_quality(items, 1);
+
+    CHECK_EQUAL(10, items[0].sellIn);
+    CHECK_EQUAL(21, items[0].quality);
+    STRCMP_EQUAL("Backstage passes to a TAFKAL80ETC concert", items[0].name);
+}
+
 void example()
 {
     Item items[6];
