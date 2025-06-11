@@ -46,6 +46,73 @@ print_item(char* buffer, Item* item)
     return buffer;
 }
 
+void update_normal_item(Item* item)
+{
+    if(item->quality > 0)
+    {
+        item->quality -= 1;
+    }
+
+    if(item->sellIn < 0 && item->quality > 0)
+    {
+        item->quality -= 1;
+    }
+}
+
+void update_aged_brie(Item* item)
+{
+    if(item->quality < 50)
+    {
+        item->quality += 1;
+    }
+
+    if(item->sellIn < 0 && item->quality < 50)
+    {
+        item->quality += 1;
+    }
+}
+
+void update_sulfuras(Item* item)
+{
+    (void)item;
+}
+
+void update_backstage_pass(Item* item)
+{
+    if(item->quality < 50)
+    {
+        item->quality += 1;
+
+        if(item->sellIn <= 10 && item->quality < 50)
+        {
+            item->quality += 1;
+        }
+
+        if(item->sellIn <= 5 && item->quality < 50)
+        {
+            item->quality += 1;
+        }
+    }
+
+    if(item->sellIn < 0)
+    {
+        item->quality = 0;
+    }
+}
+
+void update_conjured_item(Item* item)
+{
+    if(item->quality > 0)
+    {
+        item->quality -= 2;
+    }
+
+    if(item->sellIn < 0 && item->quality > 0)
+    {
+        item->quality -= 2;
+    }
+}
+
 void 
 update_quality(Item items[], int size) 
 {
