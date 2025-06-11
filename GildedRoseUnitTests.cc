@@ -74,6 +74,18 @@ TEST(TestGildedRoseGroup, TestAgedBrieItem_IncreaseQuality)
     STRCMP_EQUAL("Aged Brie", items[0].name);
 }
 
+TEST(TestGildedRoseGroup, TestSulfuras_NeverChanges)
+{
+    Item items[1];
+    init_item(items, "Sulfuras, Hand of Ragnaros", 20, 30);
+    
+    update_quality(items, 1);
+
+    CHECK_EQUAL(20, items[0].sellIn);
+    CHECK_EQUAL(30, items[0].quality);
+    STRCMP_EQUAL("Sulfuras, Hand of Ragnaros", items[0].name);
+}
+
 void example()
 {
     Item items[6];
