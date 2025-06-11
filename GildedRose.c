@@ -12,6 +12,33 @@ init_item(Item* item, const char *name, int sellIn, int quality)
     return item;
 }
 
+typedef enum
+{
+    NORMAL_ITEM,
+    AGED_BRIE,
+    SULFURAS,
+    BACKSTAGE_PASS,
+    CONJURED_ITEM
+} ItemType;
+
+ItemType get_item_type(const char* name)
+{
+    if (strcmp(name, "Aged Brie") == 0)
+        return AGED_BRIE;
+
+    else if (strcmp(name, "Sulfuras, Hand of Ragnaros") == 0)
+        return SULFURAS;
+
+    else if (strcmp(name, "Backstage passes to a TAFKAL80ETC concert") == 0)
+        return BACKSTAGE_PASS;
+
+    else if (strcmp(name, "Conjured Mana Cake") == 0)
+        return CONJURED_ITEM;
+
+    else
+        return NORMAL_ITEM;
+}
+
 extern char* 
 print_item(char* buffer, Item* item) 
 {
