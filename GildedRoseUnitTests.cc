@@ -86,7 +86,7 @@ TEST(TestGildedRoseGroup, TestSulfuras_NeverChanges)
     STRCMP_EQUAL("Sulfuras, Hand of Ragnaros", items[0].name);
 }
 
-TEST(TestGildedRoseGroup, TestBackstage_ncreasesQualityBy2_When10DaysOrLess)
+TEST(TestGildedRoseGroup, TestBackstage_IncreasesQualityBy2_When10DaysOrLess)
 {
     Item items[1];
     init_item(items, "Backstage passes to a TAFKAL80ETC concert", 10, 20);
@@ -95,6 +95,18 @@ TEST(TestGildedRoseGroup, TestBackstage_ncreasesQualityBy2_When10DaysOrLess)
 
     CHECK_EQUAL(9, items[0].sellIn);
     CHECK_EQUAL(22, items[0].quality);
+    STRCMP_EQUAL("Backstage passes to a TAFKAL80ETC concert", items[0].name);
+}
+
+TEST(TestGildedRoseGroup, TestBackstage_IncreasesQualityBy3_When5DaysOrLess)
+{
+    Item items[1];
+    init_item(items, "Backstage passes to a TAFKAL80ETC concert", 5, 20);
+    
+    update_quality(items, 1);
+
+    CHECK_EQUAL(4, items[0].sellIn);
+    CHECK_EQUAL(23, items[0].quality);
     STRCMP_EQUAL("Backstage passes to a TAFKAL80ETC concert", items[0].name);
 }
 
