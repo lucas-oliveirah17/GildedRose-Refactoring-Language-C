@@ -32,6 +32,7 @@ Nós recentemente assinamos um suprimento de itens Conjurados Magicamente. Isto 
 ### ATIVIDADE
 
 O código para o exercício acima pode ser encontrado no repositório [Gilded Rose Refactoring Kata](https://github.com/emilybache/GildedRose-Refactoring-Kata), disponível em diversas linguagens de programação. 
+
 Para a realização dessa atividade, foi optado pela Linguagem C, por maior familiaridade.
 
 1. O código refatorado.
