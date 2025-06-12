@@ -83,12 +83,12 @@ void update_backstage_pass(Item* item)
     {
         item->quality += 1;
 
-        if(item->sellIn < 10 && item->quality < 50)
+        if(item->sellIn <= 10 && item->quality < 50)
         {
             item->quality += 1;
         }
 
-        if(item->sellIn < 5 && item->quality < 50)
+        if(item->sellIn <= 5 && item->quality < 50)
         {
             item->quality += 1;
         }
